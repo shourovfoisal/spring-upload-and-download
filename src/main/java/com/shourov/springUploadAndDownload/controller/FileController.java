@@ -37,9 +37,11 @@ public class FileController {
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
     )
     public ResponseEntity<?> downloadFile(@PathVariable(value = "name") String fileName) {
-        Resource file = service.downloadFile(fileName, Locale.ENGLISH);
+        Locale locale = Locale.forLanguageTag("bn");
+        String failedMessage = messageSource.getMessage(FileMessage.FILE_DOWNLOAD_FAILURE.getCode(), null, locale);
+        Resource file = service.downloadFile(fileName, locale);
         if(file == null) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(failedMessage);
         } else {
             return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM).body(file);
         }
@@ -54,11 +56,12 @@ public class FileController {
         String status = service.uploadFile(fileName, file, locale);
         String successMessage = messageSource.getMessage(FileMessage.FILE_UPLOAD_SUCCESS.getCode(), null, locale);
         String existsMessage = messageSource.getMessage(FileMessage.FILE_ALREADY_EXISTS.getCode(), null, locale);
+        String failedMessage = messageSource.getMessage(FileMessage.FILE_UPLOAD_FAILURE.getCode(), null, locale);
         logger.info(status);
         return status.equals(successMessage)
                 ? ResponseEntity.status(HttpStatus.CREATED).body(successMessage)
                 : status.equals(existsMessage)
                     ? ResponseEntity.status(HttpStatus.CONFLICT).body(existsMessage)
-                    : ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
+                    : ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(failedMessage);
     }
 }

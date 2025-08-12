@@ -3,7 +3,8 @@ package com.shourov.springUploadAndDownload.enums;
 public enum FileMessage {
     FILE_ALREADY_EXISTS("file.exists"),
     FILE_UPLOAD_SUCCESS("file.upload.success"),
-    FILE_UPLOAD_FAILURE("file.upload.failure");
+    FILE_UPLOAD_FAILURE("file.upload.failure"),
+    FILE_DOWNLOAD_FAILURE("file.download.failure");
     
     private final String code;
     
