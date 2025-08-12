@@ -1,7 +1,0 @@
-file:
-  exists: File Already Exists
-  upload:
-    success: File Uploaded Successfully
-    failure: File Upload Failed
-  download:
-    failure: File Download Failed
