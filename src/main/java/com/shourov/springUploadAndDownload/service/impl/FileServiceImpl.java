@@ -47,7 +47,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public String uploadFile(String fileName, MultipartFile incomingFile, Locale locale) {
-        String absolutePath = rootPath + fileName;
+        String absolutePath = rootPath + "/" + fileName;
         File file = new File(absolutePath);
         
         if(file.exists()) {
@@ -66,7 +66,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public Resource downloadFile(String fileName, Locale locale) {
-        String absolutePath = rootPath + fileName;
+        String absolutePath = rootPath + "/" + fileName;
         File file = new File(absolutePath);
         
         if(file.exists()) {
