@@ -56,9 +56,9 @@ public class FileController {
         String existsMessage = messageSource.getMessage(FileMessage.FILE_ALREADY_EXISTS.getCode(), null, locale);
         logger.info(status);
         return status.equals(successMessage)
-                ? ResponseEntity.status(HttpStatus.CREATED).build()
+                ? ResponseEntity.status(HttpStatus.CREATED).body(successMessage)
                 : status.equals(existsMessage)
-                    ? ResponseEntity.status(HttpStatus.NOT_MODIFIED).build()
+                    ? ResponseEntity.status(HttpStatus.CONFLICT).body(existsMessage)
                     : ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
     }
 }
