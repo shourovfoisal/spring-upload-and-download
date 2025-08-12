@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Service
 public class FileServiceImpl implements FileService {
     
-    private static final Logger logger = Logger.getLogger(FileServiceImpl.class.getName());
+    private static final Logger log = Logger.getLogger(FileServiceImpl.class.getName());
     
     @Value("${rootPath}")
     private String rootPath;
@@ -78,10 +78,11 @@ public class FileServiceImpl implements FileService {
             try {
                 return new UrlResource(file.toURI());
             } catch (MalformedURLException e) {
-                logger.severe("File download failed.");
+                log.severe("File download failed.");
                 return null;
             }
         }
+        log.severe("File does not exist.");
         return null;
     }
 }

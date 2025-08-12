@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 @RequestMapping("/file")
 public class FileController {
     
-    private static final Logger logger = Logger.getLogger(FileController.class.getName());
+    private static final Logger log = Logger.getLogger(FileController.class.getName());
     private final FileService service;
     private final MessageSource messageSource;
     
@@ -57,7 +57,7 @@ public class FileController {
         String successMessage = messageSource.getMessage(FileMessage.FILE_UPLOAD_SUCCESS.getCode(), null, locale);
         String existsMessage = messageSource.getMessage(FileMessage.FILE_ALREADY_EXISTS.getCode(), null, locale);
         String failedMessage = messageSource.getMessage(FileMessage.FILE_UPLOAD_FAILURE.getCode(), null, locale);
-        logger.info(status);
+        log.info(status);
         return status.equals(successMessage)
                 ? ResponseEntity.status(HttpStatus.CREATED).body(successMessage)
                 : status.equals(existsMessage)
