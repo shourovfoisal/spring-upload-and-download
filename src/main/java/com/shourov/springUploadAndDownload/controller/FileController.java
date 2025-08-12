@@ -49,7 +49,7 @@ public class FileController {
     
     @PostMapping("/upload")
     public ResponseEntity<?> uploadFile(
-            @RequestParam String fileName,
+            @RequestParam(required = false) String fileName,
             @RequestParam(name = "file") MultipartFile file) {
         
         Locale locale = Locale.forLanguageTag("bn");

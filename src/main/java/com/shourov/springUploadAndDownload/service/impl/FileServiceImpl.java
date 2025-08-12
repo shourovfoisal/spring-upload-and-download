@@ -47,6 +47,11 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public String uploadFile(String fileName, MultipartFile incomingFile, Locale locale) {
+        
+        if(fileName == null || fileName.trim().isEmpty()) {
+            fileName = incomingFile.getOriginalFilename();
+        }
+        
         String absolutePath = rootPath + "/" + fileName;
         File file = new File(absolutePath);
         
